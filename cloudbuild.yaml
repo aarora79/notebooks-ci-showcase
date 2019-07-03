@@ -40,7 +40,7 @@ steps:
   entrypoint: '/bin/bash'
   # Archive uploaded to the place where the production system expects it.
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'live.tar.gz', 'gs://dl-platform-temp/notebook-ci-showcase/live.tar.gz']
+  args: ['cp', 'live.tar.gz', 'gs://nad-svcplan-lab-dl-platform-temp/notebook-ci-showcase/live.tar.gz']
   dir: 'notebooks-ci-showcase'
   # Now we zipping folder with the cloud function that we want to use on a daily basis.
 - name: 'google/cloud-sdk:237.0.0'
@@ -49,11 +49,11 @@ steps:
   entrypoint: '/bin/bash'
   # Archive with cloud function uploaded to the place where the production system expects it.
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'deploy.zip', 'gs://dl-platform-temp/notebook-ci-showcase/deploy.zip']
+  args: ['cp', 'deploy.zip', 'gs://nad-svcplan-lab-dl-platform-temp/notebook-ci-showcase/deploy.zip']
   dir: 'notebooks-ci-showcase/deploy'
   # For the next step, the cloud build service account must be granted the Cloud Functions Developer permission (not default).
 - name: 'google/cloud-sdk:237.0.0'
-  args: ['gcloud', 'functions', 'deploy', 'demo-notebook-function', '--trigger-topic=demo-notebook', '--region=us-central1', '--source=gs://dl-platform-temp/notebook-ci-showcase/deploy.zip']
+  args: ['gcloud', 'functions', 'deploy', 'demo-notebook-function', '--trigger-topic=demo-notebook', '--region=us-central1', '--source=gs://nad-svcplan-lab-dl-platform-temp/notebook-ci-showcase/deploy.zip']
 # ↑↑↑↑↑↑↑ End of Continues Delivery Part ↑↑↑↑↑↑↑↑↑↑↑↑↑##################
 ######### This part will generate actual artifact  #####################
 secrets:
